@@ -14,11 +14,11 @@ export const User = () => {
 
   const isLoggIn = useSelector((state) => state.auth.isLoggIn);
 
-  const close = () => {
+  const login = () => {
     dispatch(headerActions.searchBarDisable());
   };
 
-  const login = () => {
+  const close = () => {
     setProfileOpen(null);
   };
 
