@@ -7,12 +7,13 @@ import { Register } from "./pages/login/Register";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const showTextBar = useSelector((state) => state.header.showTextBar);
+  // read state from redux store
+  const showSearchBar = useSelector((state) => state.header.showSearchBar);
 
   return (
     <>
       <Router>
-        {showTextBar ? <Header /> : <div></div>}
+        {showSearchBar ? <Header /> : <div></div>}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />

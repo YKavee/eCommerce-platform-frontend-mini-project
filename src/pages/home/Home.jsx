@@ -3,8 +3,7 @@ import { Category } from "../../components/category/Category";
 import { Product } from "../../components/product/Product";
 
 export const Home = () => {
-  // state of category
-  const [catergory, setCatergory] = useState("");
+  const [catergory, setCatergory] = useState(""); // selected category
 
   return (
     <>

@@ -7,19 +7,22 @@ import { headerActions } from "../../store/headerSlice";
 import { useSelector } from "react-redux";
 
 export const ProductCart = ({ key, id, cover, name, price }) => {
+  // read state from redux store
   const isLoggIn = useSelector((state) => state.auth.isLoggIn);
 
   const history = useHistory();
-
   const dispatch = useDispatch();
+
+  // add items to cart
   const addToCart = () => {
     if (isLoggIn) {
       dispatch(cartActions.addToCart({ id, name, price, cover }));
     } else {
-      dispatch(headerActions.searchBarDisable());
+      dispatch(headerActions.hideSearchBar());
       history.push("/login");
     }
   };
+
   return (
     <>
       <div className="box boxItems" id="product">

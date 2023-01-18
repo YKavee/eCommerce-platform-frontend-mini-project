@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 
@@ -12,19 +12,17 @@ export const CartItems = ({ id, cover, name, price, quantity, totalPrice }) => {
   const descCartitems = () => {
     dispatch(cartActions.removeFromCart(id));
   };
+
   return (
     <>
       <div className="cardList" key={id}>
         <div className="cartContent">
           <div className="img">
             <img src={cover} alt="" />
-            {/* <button className="remove flexCenter">
-              <AiOutlineClose />
-            </button> */}
           </div>
           <div className="details">
             <p>{name}</p>
-            <label htmlFor="">Unit Price ${price}</label>
+            <label htmlFor="">Unit Price Rs. {price}</label>
 
             <div className="price">
               <div className="qty flexCenter">
@@ -36,7 +34,7 @@ export const CartItems = ({ id, cover, name, price, quantity, totalPrice }) => {
                   <AiOutlineMinus />
                 </button>
               </div>
-              <div className="priceTitle">${totalPrice}</div>
+              <div className="priceTitle">Rs. {totalPrice}</div>
             </div>
           </div>
         </div>

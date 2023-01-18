@@ -8,10 +8,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 export const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState(""); // set email
+  const [password, setPassword] = useState(""); // set password
+  const [confirmPassword, setConfirmPassword] = useState(""); // set confirm password
+
+  // read state from redux store
   const isLogged = useSelector((state) => state.auth.isLogged);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -28,7 +31,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (!isLogged) {
-      dispatch(headerActions.searchBarDisable());
+      dispatch(headerActions.hideSearchBar());
     }
   }, []);
 

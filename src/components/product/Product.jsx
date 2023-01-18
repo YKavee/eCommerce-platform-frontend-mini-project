@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./product.css";
-import { ProductCart } from "./ProductCart";
 import { useSelector } from "react-redux";
+import { ProductCart } from "./ProductCart";
+import "./product.css";
 import { getAllProducts } from "../../services/product-management/product-management-service";
 
 export const Product = ({ catergory }) => {
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [intialProductList, setInitialProductList] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]); // filterd product list
+  const [intialProductList, setInitialProductList] = useState([]); // initial product list
 
+  // read state from redux store
   const searchByText = useSelector((state) => state.header.searchText);
 
   // fetch all product details
@@ -21,6 +22,7 @@ export const Product = ({ catergory }) => {
     fetchAllProducts();
   }, []);
 
+  // filter the product list by searching
   const filterProductsByText = () => {
     if (searchByText !== "" && intialProductList.length > 0) {
       let filteredProductArray;
@@ -42,7 +44,12 @@ export const Product = ({ catergory }) => {
     }
   };
 
-  const filterProducts = () => {
+  useEffect(() => {
+    filterProductsByText();
+  }, [searchByText]);
+
+  // filter the product list by category
+  const filterProductsByCategory = () => {
     if (catergory) {
       if (catergory == "All") {
         setFilteredProducts(intialProductList);
@@ -66,14 +73,8 @@ export const Product = ({ catergory }) => {
   };
 
   useEffect(() => {
-    //setInitialProductList(product);
-    filterProducts();
+    filterProductsByCategory();
   }, [catergory]);
-
-  useEffect(() => {
-    //setInitialProductList(product);
-    filterProductsByText();
-  }, [searchByText]);
 
   return (
     <>

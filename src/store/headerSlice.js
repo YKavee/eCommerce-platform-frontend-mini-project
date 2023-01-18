@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const headerSlice = createSlice({
   name: "header",
-  initialState: { searchText: "", showTextBar: true },
+  initialState: { searchText: "", showSearchBar: true },
   reducers: {
     search(state, action) {
       const searchText = action.payload;
       state.searchText = searchText;
     },
-    searchBarEnable(state) {
-      state.showTextBar = true;
+    showSearchBar(state) {
+      state.showSearchBar = true;
     },
-    searchBarDisable(state) {
-      state.showTextBar = false;
+    hideSearchBar(state) {
+      state.showSearchBar = false;
     },
   },
 });
