@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./login.css";
 import back from "../../assets/images/my-account.jpg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { headerActions } from "../../store/headerSlice";
 import { loginUser } from "../..//services/user-management/user-management-service";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""); // set email
+  const [password, setPassword] = useState(""); // set password
+
+  // read state from redux store
   const isLogged = useSelector((state) => state.auth.isLogged);
 
   const history = useHistory();
@@ -21,15 +23,17 @@ export const Login = () => {
     e.preventDefault();
     const userDetail = await loginUser(email, password);
     if (userDetail.token.length > 0) {
+      // store token in local storage
+      localStorage.setItem("token", userDetail.token);
       dispatch(authActions.login());
-      dispatch(headerActions.searchBarEnable());
+      dispatch(headerActions.showSearchBar());
       history.push("/");
     }
   }
 
   useEffect(() => {
     if (!isLogged) {
-      dispatch(headerActions.searchBarDisable());
+      dispatch(headerActions.hideSearchBar());
     }
   }, []);
 

@@ -1,16 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Medicine from "../../assets/images/Medicine.svg";
 import "./header.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Card } from "./Card";
 import { User } from "./User";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { headerActions } from "../../store/headerSlice";
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const search = (text) => {
+
+  // store input of the search bar
+  const searchByText = (text) => {
     dispatch(headerActions.search(text));
   };
 
@@ -35,7 +37,7 @@ export const Header = () => {
               type="text"
               placeholder="Search..."
               onChange={(event) => {
-                search(event.target.value);
+                searchByText(event.target.value);
               }}
             />
           </div>

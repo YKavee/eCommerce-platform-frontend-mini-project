@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { BiShoppingBag } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
-import { product } from "../../assets/data/data";
 import { CartItems } from "./CartItems";
 import { useSelector } from "react-redux";
 import { createOrder } from "../../services/order-management/order-management-service";
@@ -9,33 +8,38 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 
 export const Card = () => {
+  const [cardOpen, setCardOpen] = useState(false);
+
   const dispatch = useDispatch();
+
+  // reset the cart after checkout
   const resetCart = () => {
     dispatch(cartActions.resetCart());
   };
 
-  const [cardOpen, setCardOpen] = useState(false);
   const closeCard = () => {
     setCardOpen(null);
   };
 
+  // read state from redux store
   const quantity = useSelector((state) => state.cart.totalQuantity);
   const cartItems = useSelector((state) => state.cart.itemsList);
 
-  //total
+  // calculate total price
   let total = 0;
   const itemsLists = useSelector((state) => state.cart.itemsList);
   itemsLists.forEach((item) => {
     total += item.totalPrice;
   });
 
-  // fetch all product details
+  // create an order
   async function createOrders() {
     const cardDetail = {
-      id: 1,
       cartProducts: itemsLists,
       totalPrice: total,
     };
+
+    // read token from local storage
     const token = localStorage.getItem("token");
     const response = await createOrder(cardDetail, token);
 
@@ -73,7 +77,7 @@ export const Card = () => {
         <div className="checkOut" onClick={createOrders}>
           <button>
             <span>Proceed To Checkout</span>
-            <label htmlFor="">${total}</label>
+            <label>Rs. {total.toFixed(2)}</label>
           </button>
         </div>
       </div>

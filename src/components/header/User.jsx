@@ -9,13 +9,14 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const User = () => {
-  const history = useHistory();
   const [profileOpen, setProfileOpen] = useState(false);
+  const history = useHistory();
 
+  // read state from redux store
   const isLoggIn = useSelector((state) => state.auth.isLoggIn);
 
-  const login = () => {
-    dispatch(headerActions.searchBarDisable());
+  const hideSearchBar = () => {
+    dispatch(headerActions.hideSearchBar());
   };
 
   const close = () => {
@@ -26,7 +27,7 @@ export const User = () => {
   const logoutHandler = () => {
     localStorage.removeItem("token");
     dispatch(authActions.logout());
-    dispatch(headerActions.searchBarDisable());
+    dispatch(headerActions.hideSearchBar());
     history.push("/login");
   };
   return (
@@ -59,7 +60,7 @@ export const User = () => {
           </>
         ) : (
           <Link to="/login">
-            <button onClick={login}>Login</button>
+            <button onClick={hideSearchBar}>Login</button>
           </Link>
         )}
       </div>

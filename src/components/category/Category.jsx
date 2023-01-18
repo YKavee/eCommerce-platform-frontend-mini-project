@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./category.css";
+import Slider from "react-slick";
 import { GrFormPrevious } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import "./category.css";
 import { getAllCategories } from "../../services/category-management/category-management-service";
 
 function SampleNextArrow(props) {
@@ -30,7 +30,7 @@ function SamplePrevArrow(props) {
 }
 
 export const Category = ({ setCatergory }) => {
-  const [categoryList, setCatergoryList] = useState([]);
+  const [categoryList, setCatergoryList] = useState([]); // category list of category component
 
   // fetch all categories
   async function fetchAllCategories() {
@@ -42,6 +42,7 @@ export const Category = ({ setCatergory }) => {
     fetchAllCategories();
   }, []);
 
+  // style for shift the category list
   var settings = {
     dots: false,
     infinite: true,
