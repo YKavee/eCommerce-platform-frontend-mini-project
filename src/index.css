@@ -93,8 +93,8 @@ form input {
 }
 .grid3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 15px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
 }
 .container {
   max-width: 95%;

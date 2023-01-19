@@ -6,7 +6,7 @@ import { cartActions } from "../../store/cartSlice";
 import { headerActions } from "../../store/headerSlice";
 import { useSelector } from "react-redux";
 
-export const ProductCart = ({ key, id, cover, name, price }) => {
+export const ProductCart = ({ id, cover, name, price }) => {
   // read state from redux store
   const isLoggIn = useSelector((state) => state.auth.isLoggIn);
 
