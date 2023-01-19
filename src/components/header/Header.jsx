@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Medicine from "../../assets/images/Medicine.svg";
+import Logo from "../../assets/images/logo.png";
 import "./header.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Card } from "./Card";
@@ -25,10 +25,10 @@ export const Header = () => {
   return (
     <>
       <header className="header">
-        <div className="scontainer flex">
-          <div className="logo">
+        <div className="container flex">
+          <div className="">
             <Link to="/">
-              <img src={Medicine} alt="Medicine" />
+              <img className="headerImg" src={Logo} alt="Medicine" />
             </Link>
           </div>
           <div className="search flex">
