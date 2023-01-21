@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "./login.css";
 import back from "../../assets/images/my-account.jpg";
 import { signupUser } from "../..//services/user-management/user-management-service";
@@ -66,6 +66,13 @@ export const Register = () => {
             />
 
             <button className="button">Register</button>
+            <br />
+            <span>
+              Already have an account? Login
+              <Link to="/login" className="link">
+                Here
+              </Link>
+            </span>
           </form>
         </div>
       </section>

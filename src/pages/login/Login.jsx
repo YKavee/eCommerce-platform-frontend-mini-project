@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./login.css";
 import back from "../../assets/images/my-account.jpg";
@@ -59,6 +59,13 @@ export const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button className="button">Log in</button>
+            <br />
+            <span>
+              Don't have an account? SignUp
+              <Link to="/register" className="link">
+                Here
+              </Link>
+            </span>
           </form>
         </div>
       </section>
