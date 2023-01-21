@@ -43,7 +43,7 @@ export const Card = () => {
     const token = localStorage.getItem("token");
     const response = await createOrder(cardDetail, token);
 
-    if (response.id) {
+    if (response.cartProducts.length > 0) {
       resetCart();
     }
   }
