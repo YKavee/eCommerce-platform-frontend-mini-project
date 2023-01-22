@@ -11,6 +11,7 @@ export const Register = () => {
   const [email, setEmail] = useState(""); // set email
   const [password, setPassword] = useState(""); // set password
   const [confirmPassword, setConfirmPassword] = useState(""); // set confirm password
+  const [errorMessage, setErrorMessage] = useState(""); // set error message
 
   // read state from redux store
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -26,6 +27,8 @@ export const Register = () => {
       if (userDetail.email) {
         history.push("/login");
       }
+    } else {
+      setErrorMessage("The password and confirmation password do not match!");
     }
   }
 
@@ -46,25 +49,38 @@ export const Register = () => {
           <form onSubmit={handleSubmit}>
             <span>Email address *</span>
             <input
-              type="text"
+              type="email"
               required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <span>Password *</span>
             <input
-              type="text"
+              type="password"
               required
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value) {
+                  setPassword(e.target.value);
+                  setErrorMessage("");
+                }
+              }}
             />
 
             <span>Confirm Password *</span>
             <input
-              type="text"
+              type="password"
               required
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value) {
+                  setConfirmPassword(e.target.value);
+                  setErrorMessage("");
+                }
+              }}
             />
-
+            {errorMessage !== "" ? (
+              <div className="error"> {errorMessage} </div>
+            ) : null}
             <button className="button">Register</button>
             <br />
             <span>
