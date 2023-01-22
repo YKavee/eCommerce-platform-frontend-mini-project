@@ -35,3 +35,10 @@
 .link {
   margin-left: 10px;
 }
+
+.error {
+  position: relative;
+  margin-bottom: 10px;
+  text-align: center;
+  color: red;
+}
