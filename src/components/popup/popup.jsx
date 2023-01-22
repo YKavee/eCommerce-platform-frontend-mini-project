@@ -28,7 +28,6 @@ export const Popup = ({ closePopup, id, cover, name, price, desc }) => {
     <div className="popup-container">
       <div className="popup-body">
         <div>
-          <h1>{name}</h1>
           <button className="close" onClick={closePopup}>
             <AiOutlineCloseCircle />
           </button>
@@ -37,12 +36,14 @@ export const Popup = ({ closePopup, id, cover, name, price, desc }) => {
           <Link>
             <img className="image" src={cover} alt="cover" />
           </Link>
+          <h1>{name}</h1>
         </div>
         <div className="details">
-          <h3>Rs. {price}</h3>
-          <a>{desc}</a>
-          <button onClick={addToCart}>
-            <AiOutlinePlusCircle />
+          <h3 className="price">Rs. {price}</h3>
+          <br />
+          <a className="desc">{desc}</a>
+          <button className="btn" onClick={addToCart}>
+            Add to Cart
           </button>
         </div>
       </div>

@@ -188,6 +188,7 @@ header {
 }
 .cartContent .price .priceTitle {
   font-size: 15px;
+  margin-left: 40px;
 }
 
 /* User */

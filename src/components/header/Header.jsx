@@ -28,7 +28,7 @@ export const Header = () => {
         <div className="container flex">
           <div className="">
             <Link to="/">
-              <img className="headerImg" src={Logo} alt="Medicine" />
+              <img className="headerImg" src={Logo} alt="" />
             </Link>
           </div>
           <div className="search flex">
