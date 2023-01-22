@@ -35,17 +35,15 @@
 
 .control-btn .next {
   position: absolute;
-  top: 40%;
-  right: -20px;
+  top: 35%;
+  right: -30px;
 }
 
 .control-btn .prev {
   position: absolute;
-  top: 40%;
-  left: -20px;
-  z-index: 99;
+  top: 35%;
+  left: -30px;
 }
 .control-btn .icon {
   font-size: 25px;
 }
-/*---------------control-btn-------------*/

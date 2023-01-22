@@ -1,21 +1,13 @@
 import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
+import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import "./popup.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 import { headerActions } from "../../store/headerSlice";
 import { useSelector } from "react-redux";
-import "./product.css";
 
-export const ProductCart = ({
-  id,
-  cover,
-  name,
-  price,
-  desc,
-  setOpen,
-  setPopupDetail,
-}) => {
+export const Popup = ({ closePopup, id, cover, name, price, desc }) => {
   // read state from redux store
   const isLoggIn = useSelector((state) => state.auth.isLoggIn);
 
@@ -32,36 +24,28 @@ export const ProductCart = ({
     }
   };
 
-  const viewPopup = () => {
-    setPopupDetail({
-      productId: id,
-      productCover: cover,
-      productName: name,
-      productPrice: price,
-      productDesc: desc,
-    });
-    setOpen(true);
-  };
-
   return (
-    <>
-      <div className="box boxItems" id="product">
-        <div className="img">
+    <div className="popup-container">
+      <div className="popup-body">
+        <div>
+          <h1>{name}</h1>
+          <button className="close" onClick={closePopup}>
+            <AiOutlineCloseCircle />
+          </button>
+        </div>
+        <div>
           <Link>
-            <img src={cover} alt="cover" />
+            <img className="image" src={cover} alt="cover" />
           </Link>
         </div>
         <div className="details">
-          <p>{name}</p>
           <h3>Rs. {price}</h3>
-          <span className="view-more" onClick={viewPopup}>
-            View More...
-          </span>
+          <a>{desc}</a>
           <button onClick={addToCart}>
-            <AiOutlineShoppingCart />
+            <AiOutlinePlusCircle />
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };

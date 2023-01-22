@@ -3,10 +3,19 @@ import { useSelector } from "react-redux";
 import { ProductCart } from "./ProductCart";
 import "./product.css";
 import { getAllProducts } from "../../services/product-management/product-management-service";
+import { Popup } from "../popup/popup";
 
 export const Product = ({ catergory }) => {
   const [filteredProducts, setFilteredProducts] = useState([]); // filterd product list
   const [intialProductList, setInitialProductList] = useState([]); // initial product list
+  const [open, setOpen] = useState(false);
+  const [popupDetail, setPopupDetail] = useState({
+    productId: "",
+    productCover: "",
+    productName: "",
+    productPrice: "",
+    productDesc: "",
+  });
 
   // read state from redux store
   const searchByText = useSelector((state) => state.header.searchText);
@@ -82,13 +91,27 @@ export const Product = ({ catergory }) => {
         <div className="container grid3">
           {filteredProducts.map((item) => (
             <ProductCart
-              key={item.id}
               id={item.id}
               cover={item.cover}
               name={item.name}
               price={item.price}
+              desc={item.desc}
+              setOpen={setOpen}
+              setPopupDetail={setPopupDetail}
             />
           ))}
+        </div>
+        <div>
+          {open ? (
+            <Popup
+              closePopup={() => setOpen(false)}
+              id={popupDetail.productId}
+              cover={popupDetail.productCover}
+              name={popupDetail.productName}
+              price={popupDetail.productPrice}
+              desc={popupDetail.productDesc}
+            />
+          ) : null}
         </div>
       </section>
     </>

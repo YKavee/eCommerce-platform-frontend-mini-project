@@ -30,3 +30,8 @@
   margin-top: 15px;
   float: right;
 }
+.view-more {
+  position: absolute;
+  margin-top: 15px;
+  color: rgb(59, 97, 188);
+}
