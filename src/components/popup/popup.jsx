@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import "./popup.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";

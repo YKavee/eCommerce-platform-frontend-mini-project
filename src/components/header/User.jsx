@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { headerActions } from "../../store/headerSlice";
+import { orderActions } from "../../store/orderSlice";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getOrderDetail } from "../../services/order-management/order-management-service";
 
 export const User = () => {
   const [profileOpen, setProfileOpen] = useState(false);
@@ -30,6 +32,18 @@ export const User = () => {
     dispatch(headerActions.hideSearchBar());
     history.push("/login");
   };
+
+  // fetch order details
+  async function fetchOrderDetail() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const orderDetail = await getOrderDetail(token);
+      if (orderDetail.length > 0) {
+        dispatch(orderActions.setOrderDetail(orderDetail));
+      }
+    }
+  }
+
   return (
     <>
       <div className="profile">
@@ -47,7 +61,7 @@ export const User = () => {
 
             {profileOpen && (
               <div className="openProfile boxItems" onClick={close}>
-                <button className="box">
+                <button className="box" onClick={fetchOrderDetail}>
                   <BsBagCheck className="icon" />
                   <h4>My Order</h4>
                 </button>
