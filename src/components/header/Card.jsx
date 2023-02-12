@@ -77,7 +77,14 @@ export const Card = () => {
             <AiOutlineClose className="icon" />
           </button>
         </div>
-        <div style={{ overflowY: "scroll", maxHeight: "800px" }}>
+
+        <div>
+          <button className="clear-cart-button" onClick={resetCart}>
+            Clear Cart
+          </button>
+        </div>
+
+        <div style={{ overflowY: "scroll", maxHeight: "750px" }}>
           {cartItems.map((item) => (
             <CartItems
               id={item.id}

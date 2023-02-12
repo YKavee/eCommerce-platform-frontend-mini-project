@@ -9,7 +9,7 @@ import { ViewOrder } from "../view-order-popup/view-order-popup";
 export const Product = ({ catergory }) => {
   const [filteredProducts, setFilteredProducts] = useState([]); // filterd product list
   const [intialProductList, setInitialProductList] = useState([]); // initial product list
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // view product details
   const [popupDetail, setPopupDetail] = useState({
     productId: "",
     productCover: "",
@@ -24,7 +24,6 @@ export const Product = ({ catergory }) => {
   const orderDetail = useSelector((state) => state.order.orderDetail);
 
   useEffect(() => {
-    console.log("orderDetail", orderDetail);
     if (orderDetail.length > 0) {
       setViewOrder(true);
     } else {
