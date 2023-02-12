@@ -4,11 +4,12 @@ import { ProductCart } from "./ProductCart";
 import "./product.css";
 import { getAllProducts } from "../../services/product-management/product-management-service";
 import { Popup } from "../popup/popup";
+import { ViewOrder } from "../view-order-popup/view-order-popup";
 
 export const Product = ({ catergory }) => {
   const [filteredProducts, setFilteredProducts] = useState([]); // filterd product list
   const [intialProductList, setInitialProductList] = useState([]); // initial product list
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // view product details
   const [popupDetail, setPopupDetail] = useState({
     productId: "",
     productCover: "",
@@ -16,9 +17,19 @@ export const Product = ({ catergory }) => {
     productPrice: "",
     productDesc: "",
   });
+  const [viewOrder, setViewOrder] = useState(false);
 
   // read state from redux store
   const searchByText = useSelector((state) => state.header.searchText);
+  const orderDetail = useSelector((state) => state.order.orderDetail);
+
+  useEffect(() => {
+    if (orderDetail.length > 0) {
+      setViewOrder(true);
+    } else {
+      setViewOrder(false);
+    }
+  }, [orderDetail]);
 
   // fetch all product details
   async function fetchAllProducts() {
@@ -101,6 +112,7 @@ export const Product = ({ catergory }) => {
             />
           ))}
         </div>
+
         <div>
           {open ? (
             <Popup
@@ -111,6 +123,12 @@ export const Product = ({ catergory }) => {
               price={popupDetail.productPrice}
               desc={popupDetail.productDesc}
             />
+          ) : null}
+        </div>
+
+        <div>
+          {viewOrder ? (
+            <ViewOrder closePopup={() => setViewOrder(false)} />
           ) : null}
         </div>
       </section>

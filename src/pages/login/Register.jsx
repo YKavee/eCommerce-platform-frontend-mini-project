@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./login.css";
-import back from "../../assets/images/my-account.jpg";
+import back from "../../assets/images/grocery-shopping.jpg";
 import { signupUser } from "../..//services/user-management/user-management-service";
 import { headerActions } from "../../store/headerSlice";
 import { useSelector } from "react-redux";
@@ -26,6 +26,8 @@ export const Register = () => {
       const userDetail = await signupUser(email, password);
       if (userDetail.email) {
         history.push("/login");
+      } else {
+        setErrorMessage("User Alredy Exists!");
       }
     } else {
       setErrorMessage("The password and confirmation password do not match!");
@@ -52,7 +54,12 @@ export const Register = () => {
               type="email"
               required
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value) {
+                  setEmail(e.target.value);
+                  setErrorMessage("");
+                }
+              }}
             />
 
             <span>Password *</span>

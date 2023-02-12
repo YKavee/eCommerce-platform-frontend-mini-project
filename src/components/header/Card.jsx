@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiShoppingBag } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { CartItems } from "./CartItems";
@@ -9,6 +9,8 @@ import { cartActions } from "../../store/cartSlice";
 
 export const Card = () => {
   const [cardOpen, setCardOpen] = useState(false);
+  const [isDisable, setIsDisable] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -26,17 +28,29 @@ export const Card = () => {
   const cartItems = useSelector((state) => state.cart.itemsList);
 
   // calculate total price
-  let total = 0;
-  const itemsLists = useSelector((state) => state.cart.itemsList);
-  itemsLists.forEach((item) => {
-    total += item.totalPrice;
-  });
+  const calculateTotalPrice = () => {
+    if (cartItems.length > 0) {
+      let total = 0;
+      setIsDisable(false);
+      cartItems.forEach((item) => {
+        total += item.totalPrice;
+        setTotalPrice(total);
+      });
+    } else {
+      setIsDisable(true);
+      setTotalPrice(0);
+    }
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [cartItems]);
 
   // create an order
   async function createOrders() {
     const cardDetail = {
-      cartProducts: itemsLists,
-      totalPrice: total,
+      cartProducts: cartItems,
+      totalPrice: totalPrice,
     };
 
     // read token from local storage
@@ -63,21 +77,30 @@ export const Card = () => {
             <AiOutlineClose className="icon" />
           </button>
         </div>
-        {cartItems.map((item) => (
-          <CartItems
-            id={item.id}
-            cover={item.cover}
-            name={item.name}
-            price={item.price}
-            quantity={item.quantity}
-            totalPrice={item.totalPrice}
-          />
-        ))}
+
+        <div>
+          <button className="clear-cart-button" onClick={resetCart}>
+            Clear Cart
+          </button>
+        </div>
+
+        <div style={{ overflowY: "scroll", maxHeight: "750px" }}>
+          {cartItems.map((item) => (
+            <CartItems
+              id={item.id}
+              cover={item.cover}
+              name={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              totalPrice={item.totalPrice}
+            />
+          ))}
+        </div>
 
         <div className="checkOut" onClick={createOrders}>
-          <button>
+          <button disabled={isDisable}>
             <span>Proceed To Checkout</span>
-            <label>Rs. {total.toFixed(2)}</label>
+            <label>Rs. {totalPrice.toFixed(2)}</label>
           </button>
         </div>
       </div>

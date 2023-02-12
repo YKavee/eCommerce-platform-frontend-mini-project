@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./login.css";
-import back from "../../assets/images/my-account.jpg";
+import back from "../../assets/images/grocery-shopping.jpg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 import { headerActions } from "../../store/headerSlice";
