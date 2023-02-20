@@ -8,7 +8,7 @@ export async function loginUser(email, password) {
     };
 
     const response = await axios
-      .post(`http://localhost:3000/food-ordering/v1/users/login`, user)
+      .post(`http://localhost:4000/food-ordering/v1/users/login`, user)
       .then((res) => {
         return res.data;
       });
@@ -27,7 +27,7 @@ export async function signupUser(email, password) {
     };
 
     const response = await axios
-      .post(`http://localhost:3000/food-ordering/v1/users/signup`, user)
+      .post(`http://localhost:4000/food-ordering/v1/users/signup`, user)
       .then((res) => {
         return res.data;
       });

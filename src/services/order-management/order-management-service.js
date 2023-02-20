@@ -7,7 +7,7 @@ export async function createOrder(cartDetail, token) {
     };
 
     const response = await axios
-      .post(`http://localhost:3000/food-ordering/v1/orders`, cartDetail, {
+      .post(`http://localhost:4000/food-ordering/v1/orders`, cartDetail, {
         headers: headers,
       })
       .then((res) => {
@@ -27,7 +27,7 @@ export async function getOrderDetail(token) {
     };
 
     const response = await axios
-      .get(`http://localhost:3000/food-ordering/v1/orders`, {
+      .get(`http://localhost:4000/food-ordering/v1/orders`, {
         headers: headers,
       })
       .then((res) => {
